@@ -13,15 +13,22 @@ def scraping(papers_dico):
 #Makes a file for each article from each newspaper
      for paper_name in list(papers_dico) :
         articles_dico=make_articles_dico(paper_name, papers_dico) #Returns a dictionary {article_name : article_url}
-        print(articles_dico)
+        print(articles_dico) #à enlever
+        
+        if not os.path.exists(paper_name): #Checks if a folder named after the newspaper exists
+                os.makedirs(paper_name)
+                print("%s in the making" %paper_name) #à enlever
+                
+        articles_list = "%s/articles_list.txt" %paper_name
+        output_list = io.open(articles_list, "w", encoding="utf8")
+        
         for article_name in list(articles_dico) :
+            output_list.write(papername + "\n")
             file_name = "%s\%s.txt" %(paper_name, article_name)
             content=scrape_article_content(articles_dico[article_name]) #Returns the body of the article
-            
-            if not os.path.exists(paper_name): #Checks if a folder named after the newspaper exists
-                os.makedirs(paper_name)
-                print("%s in the making" %papername)
         
             output = io.open(file_name,"w", encoding="utf8")
             output.write(content)
             output.close()
+            
+        output_list.close()
