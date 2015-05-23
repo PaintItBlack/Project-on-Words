@@ -9,13 +9,13 @@ def oldest_files_in_tree(rootfolder, count=1):
 
 
 if Article_Base.objects.all() :
-             all_articles = Article_Base.objects.all().order_by('date')
-             m = len(all_articles)
-             if m > 5 :
-                  if n > m :
-                       oldest_articles = all_articles[:m] #Makes a list of the n oldest txt files; with m = number of old articles
-                  else :
-                       oldest_articles = all_articles[:n] #Makes a list of the n oldest txt files; with n = number of new articles
+    all_articles = Article_Base.objects.all().order_by('date')
+    m = len(all_articles)
+    if m > 5 :
+        if n > m :
+            oldest_articles = all_articles[:m] #Makes a list of the n oldest txt files; with m = number of old articles
+        else :
+            oldest_articles = all_articles[:n] #Makes a list of the n oldest txt files; with n = number of new articles
 
-                  for old_article in oldest_articles : #Remove n oldest files
-                       old_article.delete()
+        for old_article in oldest_articles : #Remove n oldest files
+            old_article.delete()
