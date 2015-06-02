@@ -1,21 +1,13 @@
-import os, heapq
-
-def oldest_files_in_tree(rootfolder, count=1):
-    return heapq.nsmallest(count,
-        (os.path.join(dirname, filename)
-        for dirname, dirnames, filenames in os.walk(rootfolder)
-        for filename in filenames),
-        key=lambda fn: os.stat(fn).st_mtime)
-
-
-if Article_Base.objects.all() :
-    all_articles = Article_Base.objects.all().order_by('date')
-    m = len(all_articles)
-    if m > 5 :
-        if n > m :
-            oldest_articles = all_articles[:m] #Makes a list of the n oldest txt files; with m = number of old articles
-        else :
-            oldest_articles = all_articles[:n] #Makes a list of the n oldest txt files; with n = number of new articles
-
-        for old_article in oldest_articles : #Remove n oldest files
-            old_article.delete()
+def dist (l_words, l_sen): #Another way would be to have 
+    length = len(l_words)
+    d_mat = zeros(length,length)
+    for i in range(length):
+        word1=l_words[i]
+        for j in range(i):
+            word2=l_words[j]
+            for sentence in l_sen:
+                test1 = word1 in sentence
+                test2 = word2 in sentence
+                if ((not test1) and test2) or (test1 and (not test2)):
+                    d_mat[i][j] += 1
+    return d_mat
