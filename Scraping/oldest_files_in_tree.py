@@ -1,3 +1,4 @@
+#lol
 urlpatterns = patterns('Tree_Show.views',
     url(r'^$', 'Tree_Appear'),
     url(r'^(?P<name>[-\w\d]+)$', 'Paper_Appear'), #/paper
