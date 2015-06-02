@@ -1,20 +1,14 @@
-# Looking for a word in an ordered list
-def cherche_dicho (mot, m) :
-    a = 0
-    b = len (mot)-1
-    nb = 0
-    while a < b :
-        nb += 1
-        p = (a+b)/2
-        if mot [p] == m : return p,nb
-        elif mot [p] > m : b = p-1
-        else : a = p+1
-    return -1,nb
 
-def kill_stop_words_bis(list_dep,list_stop):
-    liste = []
-    for a in list_dep:
-        (position, nbiter) = cherche_dicho(a, list_dep)
-        if position=-1:
-                liste.append(a)
-    return liste
+def dist (l_words, l_sen): #Another way would be to have 
+    length = len(l_words)
+    d_mat = zeros(length,length)
+    for i in range(length):
+        word1=l_words[i]
+        for j in range(i):
+            word2=l_words[j]
+            for sentence in l_sen:
+                test1 = word1 in sentence
+                test2 = word2 in sentence
+                if ((not test1) and test2) or (test1 and (not test2)):
+                    d_mat[i][j] += 1
+    return d_mat
